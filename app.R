@@ -4,6 +4,7 @@ library(tidyverse)
 # Read in data
 normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
 geneNames = read_csv('data/GeneNames.csv')
+source('code/functions.R')
 
 # Define UI ----
 ui <- fluidPage(
