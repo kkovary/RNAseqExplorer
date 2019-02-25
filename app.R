@@ -58,12 +58,11 @@ server <- function(input, output) {
   
   # Reactive value for selected dataset ----
   datasetInput <- reactive({
-    plot_data <- filter(normalized_data_genelevel_tpm, tolower(GeneName) %in% tolower(unlist(strsplit(input$genes, " "))))
-    plot_data <- gather(plot_data, "Sample", "TPM", 2:ncol(plot_data))
-    plot_data <- plot_data %>% separate(Sample, into = c("siRNA", "Day", "Replicate"), sep = "\\_")
-    plot_data$siRNA <- paste0("si",plot_data$siRNA)
-    plot_data$Day <- as.numeric(plot_data$Day)
-    plot_data <- filter(plot_data, siRNA %in% input$siRNA, Day %in% input$time)
+    plot_data = filter(normalized_data_genelevel_tpm, tolower(GeneName) %in% tolower(unlist(strsplit(input$genes, " ")))) %>%
+      gather("Sample", "TPM", 2:ncol(.)) %>% 
+      separate(Sample, into = c("siRNA", "Day", "Replicate"), sep = "\\_") %>%
+      mutate(siRNA = paste0('si', siRNA), Day = as.numeric(Day)) %>%
+      filter(siRNA %in% input$siRNA, Day %in% input$time)
   })
   
   tableFormat <- reactive({
