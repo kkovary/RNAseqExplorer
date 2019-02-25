@@ -56,16 +56,26 @@ ui <- fluidPage(
 # Define server logic ----
 server <- function(input, output) {
   
-  # Reactive value for selected dataset ----
+  # Reads genes and formats them when plot buttion is pushed
+  geneNames <- reactive({
+    
+    input$plot
+    isolate(input$genes %>% strsplit(' ') %>% unlist() %>% tolower())
+  })
+  
+  # Formats the data for plotting
   datasetInput <- reactive({
-    plot_data = filter(normalized_data_genelevel_tpm, tolower(GeneName) %in% tolower(unlist(strsplit(input$genes, " ")))) %>%
+    
+    plot_data = filter(normalized_data_genelevel_tpm, tolower(GeneName) %in% geneNames()) %>%
       gather("Sample", "TPM", 2:ncol(.)) %>% 
       separate(Sample, into = c("siRNA", "Day", "Replicate"), sep = "\\_") %>%
       mutate(siRNA = paste0('si', siRNA), Day = as.numeric(Day)) %>%
       filter(siRNA %in% input$siRNA, Day %in% input$time)
   })
   
+  # Formats the data for table output
   tableFormat <- reactive({
+    
     tab = datasetInput() %>% unite("Day_Replicate", c("Day", "Replicate")) %>% 
       spread("Day_Replicate","TPM") %>% unite("Condition", c("GeneName","siRNA"))
     
@@ -76,7 +86,7 @@ server <- function(input, output) {
   })
   
 
-  
+  # Defines the different plots
   datasetPlot <- reactive({
     if(input$plot_type == 'Loess'){
       ggplot(datasetInput(), aes(Day, TPM, colour = siRNA)) + geom_point() + geom_smooth(method = loess) +
