@@ -1,15 +1,9 @@
-# sudo nano RNAseq-shiny-20180309-152352-41371.log
-# sudo rm -r RNAseq
-# sudo cp -r Desktop/app_180403.R /srv/shiny-server/apps/RNAseq/app.R
-#  sudo systemctl restart shiny-server
-# sudo su -     -c "R -e \"install.packages(c('ggplot2'), repos='http://cran.rstudio.com/')\""
-
-
 library(shiny)
 library(tidyverse)
 
-#normalized_data_genelevel_tpm = read.csv(file = "/srv/shiny-server/apps/RNAseq/normalized_data_genelevel_tpm.csv")
+# Read in data
 normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
+
 # Define UI ----
 ui <- fluidPage(
   titlePanel(strong("RNA-seq Time Course Plots")),
@@ -31,6 +25,8 @@ ui <- fluidPage(
                          inline = TRUE),
       
       textInput("genes", "Genes (separate by space):", value = "Pparg"),
+      
+      actionButton('plot','Plot'),
       
       
     h3(strong("Download")),
@@ -60,29 +56,37 @@ ui <- fluidPage(
 # Define server logic ----
 server <- function(input, output) {
   
-  # Reactive value for selected dataset ----
-  datasetInput <- reactive({
-    plot_data <- filter(normalized_data_genelevel_tpm, tolower(GeneName) %in% tolower(unlist(strsplit(input$genes, " "))))
-    plot_data <- gather(plot_data, "Sample", "TPM", 2:ncol(plot_data))
-    plot_data <- plot_data %>% separate(Sample, into = c("siRNA", "Day", "Replicate"), sep = "\\_")
-    plot_data$siRNA <- paste0("si",plot_data$siRNA)
-    plot_data$Day <- as.numeric(plot_data$Day)
-    plot_data <- filter(plot_data, siRNA %in% input$siRNA, Day %in% input$time)
+  # Reads genes and formats them when plot buttion is pushed
+  geneNames <- reactive({
+    
+    input$plot
+    isolate(input$genes %>% strsplit(' ') %>% unlist() %>% tolower())
   })
   
+  # Formats the data for plotting
+  datasetInput <- reactive({
+    
+    plot_data = filter(normalized_data_genelevel_tpm, tolower(GeneName) %in% geneNames()) %>%
+      gather("Sample", "TPM", 2:ncol(.)) %>% 
+      separate(Sample, into = c("siRNA", "Day", "Replicate"), sep = "\\_") %>%
+      mutate(siRNA = paste0('si', siRNA), Day = as.numeric(Day)) %>%
+      filter(siRNA %in% input$siRNA, Day %in% input$time)
+  })
+  
+  # Formats the data for table output
   tableFormat <- reactive({
-    tab <- datasetInput()
-    tab <- unite(tab,"Day_Replicate", c("Day", "Replicate"))
-    tab <- spread(tab,"Day_Replicate","TPM")
-    tab <- unite(tab, "Condition", c("GeneName","siRNA"))
-    mat <- t(tab[2:ncol(tab)])
+    
+    tab = datasetInput() %>% unite("Day_Replicate", c("Day", "Replicate")) %>% 
+      spread("Day_Replicate","TPM") %>% unite("Condition", c("GeneName","siRNA"))
+    
+    mat = t(tab[2:ncol(tab)])
     mat = cbind(colnames(tab[,2:ncol(tab)]),mat)
     colnames(mat) = c("Sample",as.character(tab$Condition))
-    mat <- as.data.frame(mat) %>% separate(Sample, into = c("Day","Replicate"), sep = "\\_")
+    as.data.frame(mat) %>% separate(Sample, into = c("Day","Replicate"), sep = "\\_")
   })
   
 
-  
+  # Defines the different plots
   datasetPlot <- reactive({
     if(input$plot_type == 'Loess'){
       ggplot(datasetInput(), aes(Day, TPM, colour = siRNA)) + geom_point() + geom_smooth(method = loess) +
