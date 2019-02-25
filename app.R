@@ -6,12 +6,10 @@
 
 
 library(shiny)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
+library(tidyverse)
 
-normalized_data_genelevel_tpm = read.csv(file = "/srv/shiny-server/apps/RNAseq/normalized_data_genelevel_tpm.csv")
-
+#normalized_data_genelevel_tpm = read.csv(file = "/srv/shiny-server/apps/RNAseq/normalized_data_genelevel_tpm.csv")
+normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
 # Define UI ----
 ui <- fluidPage(
   titlePanel(strong("RNA-seq Time Course Plots")),
@@ -64,7 +62,7 @@ server <- function(input, output) {
   
   # Reactive value for selected dataset ----
   datasetInput <- reactive({
-    plot_data <- filter(normalized_data_genelevel_tpm, GeneName %in% unlist(strsplit(input$genes, " ")))
+    plot_data <- filter(normalized_data_genelevel_tpm, tolower(GeneName) %in% tolower(unlist(strsplit(input$genes, " "))))
     plot_data <- gather(plot_data, "Sample", "TPM", 2:ncol(plot_data))
     plot_data <- plot_data %>% separate(Sample, into = c("siRNA", "Day", "Replicate"), sep = "\\_")
     plot_data$siRNA <- paste0("si",plot_data$siRNA)
