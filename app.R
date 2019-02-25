@@ -26,6 +26,8 @@ ui <- fluidPage(
       
       textInput("genes", "Genes (separate by space):", value = "Pparg"),
       
+      actionButton('plot','Plot'),
+      
       
     h3(strong("Download")),
     
