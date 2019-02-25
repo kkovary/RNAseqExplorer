@@ -1,5 +1,8 @@
 library(shiny)
-library(tidyverse)
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(tidyr)
 
 # Read in data
 normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
