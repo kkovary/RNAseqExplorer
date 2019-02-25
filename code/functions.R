@@ -1,5 +1,5 @@
 ### Additional functions ###
 
-geneSearch <- fuction(geneList){
-  
+geneSearch <- function(geneList){
+  geneList
 }
