@@ -1,4 +1,4 @@
-# Test 123
+
 library(shiny)
 library(tidyverse)
 
@@ -65,14 +65,13 @@ server <- function(input, output) {
   })
   
   tableFormat <- reactive({
-    tab <- datasetInput()
-    tab <- unite(tab,"Day_Replicate", c("Day", "Replicate"))
-    tab <- spread(tab,"Day_Replicate","TPM")
-    tab <- unite(tab, "Condition", c("GeneName","siRNA"))
-    mat <- t(tab[2:ncol(tab)])
+    tab = datasetInput() %>% unite("Day_Replicate", c("Day", "Replicate")) %>% 
+      spread("Day_Replicate","TPM") %>% unite("Condition", c("GeneName","siRNA"))
+    
+    mat = t(tab[2:ncol(tab)])
     mat = cbind(colnames(tab[,2:ncol(tab)]),mat)
     colnames(mat) = c("Sample",as.character(tab$Condition))
-    mat <- as.data.frame(mat) %>% separate(Sample, into = c("Day","Replicate"), sep = "\\_")
+    as.data.frame(mat) %>% separate(Sample, into = c("Day","Replicate"), sep = "\\_")
   })
   
 
