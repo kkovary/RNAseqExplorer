@@ -1,9 +1,9 @@
-
 library(shiny)
 library(tidyverse)
 
-#normalized_data_genelevel_tpm = read.csv(file = "/srv/shiny-server/apps/RNAseq/normalized_data_genelevel_tpm.csv")
+# Read in data
 normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
+
 # Define UI ----
 ui <- fluidPage(
   titlePanel(strong("RNA-seq Time Course Plots")),
