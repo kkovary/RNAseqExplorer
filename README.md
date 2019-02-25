@@ -4,17 +4,12 @@ This is a Shiny App that plots RNA-seq data
 
 # To Update Shiny Server, type into terminal:
 
-cd /srv/shiny-server/apps/RNAseq/
-sudo git pull
-sudo systemctl restart shiny-server
+1) cd /srv/shiny-server/apps/RNAseq/
+2) sudo git pull
+3) sudo systemctl restart shiny-server
 
+# To Setup Repository on Server
 sudo git clone https://github.com/kkovary/RNA-seq_Plot.git /srv/shiny-server/apps/RNAseq
-
-1) sudo rm -r /home/teruel/RNA-seq_Plot/
-1) git clone https://github.com/kkovary/RNA-seq_Plot.git
-2) sudo rm -r /srv/shiny-server/apps/RNA-seq_Plot
-3) sudo cp -r /home/teruel/RNA-seq_Plot/ /srv/shiny-server/apps/RNA-seq_Plot/
-4) sudo systemctl restart shiny-server
 
 # Useful commands for updating Shiny Server
 sudo nano RNAseq-shiny-20180309-152352-41371.log
