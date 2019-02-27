@@ -1,37 +1,17 @@
 ### Additional functions ###
 
-geneSearch <- function(geneList){
-  geneList
+geneSearch <- function(searchList, geneList){
+  # The goal of this function is to take in a list of genes
+  # of interest and search a gene synonym database for
+  # a match with a cannonical name as well as the searched name
+  
+  geneList %>% filter(tolower(GN_Syn) %in% tolower(searchList))
 }
 
-
-
-#geneList = c('Acp2', 'Nr1c1', 'COAB') %>% tolower()
-
-#filter_all(test, tolower(GN_Syn) %in% geneList)
-
-#test = gn %>% mutate(GN_Syn = str_split(GN_Syn, ' '))
-
-
-#test %>% map_lgl(tolower(GN_Syn), ~ geneList)
-
-#test %>% filter(map_lgl(tolower(GN_Syn), ~ which(. %in% geneList)))
-
-test %>% map(GN_Syn, ~ !is.na(.))
-
-any_not_na <- function(x) {
-  !all(map_lgl(x, is.na))
+nameMatch <- function(x){
+  # The
 }
 
-
-dat_cleaned <- dat %>%
-  rownames_to_column("ID") %>%
-  group_by(ID) %>%
-  nest() %>%
-  filter(map_lgl(data, any_not_na)) %>%
-  unnest() %>%
-  select(-ID)
-
-
-
+# Searches the GN_Syn column for all matching GNs
+# and returns the filtered df
 
