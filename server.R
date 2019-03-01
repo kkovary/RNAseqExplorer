@@ -1,63 +1,17 @@
+#
+# This is the server logic of a Shiny web application. You can run the 
+# application by clicking 'Run App' above.
+#
+# Find out more about building applications with Shiny here:
+# 
+#    http://shiny.rstudio.com/
+#
+
 library(shiny)
-library(tidyverse)
 
-# Read in data
-normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
-geneNames = read_csv('data/GeneNames.csv')
-source('code/functions.R', local = TRUE)
-
-# Define UI ----
-ui <- fluidPage(
-  titlePanel(strong("RNA-seq Time Course Plots")),
-  h6(em("Atefeh Rabiee, Nathan Abell, Mary N. Teruel")),
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("plot_type", "Plot Type:", c("Mean","Loess")),
-      textOutput("result"),
-      
-      checkboxGroupInput("siRNA", "siRNA Data to Plot:",
-                         c("siCtrl" = "siNC","siPPARg" = "siPPARG"),
-                         selected = c("siNC","siPPARG"),
-                         inline = TRUE),
-      
-      checkboxGroupInput("time", "Time Points to Plot (Days):",
-                         c("0" = 0,"0.5" = 0.5, "1" = 1, "2" = 2, 
-                           "3" = 3, "4" = 4, "5" = 5, "6" = 6),
-                         selected = c(0,0.5,1,2,3,4,5,6),
-                         inline = TRUE),
-      
-      textInput("genes", "Genes (separate by space):", value = "Pparg"),
-      
-      actionButton('plot','Plot'),
-      
-      
-    h3(strong("Download")),
-    
-    # Download Plot Settings
-    h5("PDF Dimensions"),
-    splitLayout(
-      textInput("width", "Width (in)", value = 10),
-      textInput("height", "Height (in)", value = 5)
-    ),
-    
-    downloadButton("downloadPlot", "Export plot as PDF"),
-    
-    # Download Data Settings
-    downloadButton("downloadData", "Export table as CSV")
-      
-      
-    ),
-    
-    mainPanel(
-      plotOutput("plot"),
-      tableOutput("table")
-    )
-  )
-)
-
-# Define server logic ----
-server <- function(input, output) {
-  
+# Define server logic required to draw a histogram
+shinyServer(function(input, output) {
+   
   # Reads genes and formats them when plot buttion is pushed
   geneNames <- reactive({
     
@@ -87,7 +41,7 @@ server <- function(input, output) {
     as.data.frame(mat) %>% separate(Sample, into = c("Day","Replicate"), sep = "\\_")
   })
   
-
+  
   # Defines the different plots
   datasetPlot <- reactive({
     if(input$plot_type == 'Loess'){
@@ -113,7 +67,7 @@ server <- function(input, output) {
   
   # Plot Data  
   output$plot <- renderPlot({
-   
+    
     datasetPlot()
     
   })
@@ -146,7 +100,5 @@ server <- function(input, output) {
       write.csv(tableFormat(), file, row.names = FALSE)
     }
   )
-}
-
-# Run the app ----
-shinyApp(ui = ui, server = server)
+  
+})
