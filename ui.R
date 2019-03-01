@@ -45,8 +45,14 @@ shinyUI(
                         ),
                           
                       mainPanel(
-                        plotOutput("plot"),
-                        tableOutput("table")
+                        tabsetPanel(
+                          tabPanel("Plots", 
+                                   plotOutput("plot")
+                                   ),
+                          tabPanel("Data Table", 
+                                   tableOutput("table")
+                                   )
+                        )
                         )
                       ),
              tabPanel('Volcano Plots')
