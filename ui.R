@@ -52,7 +52,7 @@ shinyUI(
                           tabPanel("Data Table", 
                                    tableOutput("table")
                                    )
-                        )
+                          )
                         )
                       ),
              tabPanel('Volcano Plots')
