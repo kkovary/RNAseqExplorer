@@ -1,20 +1,18 @@
-#
-# This is the server logic of a Shiny web application. You can run the 
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(tidyr)
 
-# Define server logic required to draw a histogram
+# Read in data
+normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
+geneSyns = read_csv('data/GeneNames.csv')
+
+
 shinyServer(function(input, output) {
    
   # Reads genes and formats them when plot buttion is pushed
   geneNames <- reactive({
-    
     input$plot
     isolate(input$genes %>% strsplit(' ') %>% unlist() %>% tolower())
   })
@@ -22,7 +20,7 @@ shinyServer(function(input, output) {
   # Formats the data for plotting
   datasetInput <- reactive({
     
-    plot_data = filter(normalized_data_genelevel_tpm, tolower(GeneName) %in% geneNames()) %>%
+    plot_data = filter(normalized_data_genelevel_tpm, tolower(GeneName) %in% geneSyns()) %>%
       gather("Sample", "TPM", 2:ncol(.)) %>% 
       separate(Sample, into = c("siRNA", "Day", "Replicate"), sep = "\\_") %>%
       mutate(siRNA = paste0('si', siRNA), Day = as.numeric(Day)) %>%
