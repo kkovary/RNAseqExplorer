@@ -8,7 +8,6 @@ library(tidyr)
 normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
 geneSyns = read_csv('data/GeneNames.csv')
 
-
 shinyServer(function(input, output) {
    
   # Reads genes and formats them when plot buttion is pushed
@@ -20,7 +19,7 @@ shinyServer(function(input, output) {
   # Formats the data for plotting
   datasetInput <- reactive({
     
-    plot_data = filter(normalized_data_genelevel_tpm, tolower(GeneName) %in% geneSyns()) %>%
+    plot_data = filter(normalized_data_genelevel_tpm, tolower(GeneName) %in% geneNames()) %>%
       gather("Sample", "TPM", 2:ncol(.)) %>% 
       separate(Sample, into = c("siRNA", "Day", "Replicate"), sep = "\\_") %>%
       mutate(siRNA = paste0('si', siRNA), Day = as.numeric(Day)) %>%

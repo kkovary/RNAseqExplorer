@@ -1,22 +1,20 @@
 ### Additional functions ###
 
-geneSearch <- function(searchList, geneList){
+geneSearch <- function(searchList){
   # The goal of this function is to take in a list of genes
   # of interest and search a gene synonym database for
   # a match with a cannonical name as well as the searched name.
   
-  geneList %>% filter(tolower(GN_Syn) %in% tolower(searchList))
-}
-
-nameMatch <- function(x){
-  # The goal of this function is to take the matches from a gene
-  # search list and a synonym list, match them with the RNA-seq
-  # data, and output a dataframe with the searched for names
-  # along with the cannonical name.
+  df = geneSyns %>% filter(tolower(GN_Syn) %in% tolower(searchList)) %>%
+    mutate(match = GeneName == GN_Syn, plotName = ifelse(match, GeneName, 
+                                                           paste0(GN_Syn,' (',GeneName,')')))
   
+  df = df %>% inner_join(normalized_data_genelevel_tpm, ., by = 'GeneName') %>%
+    select(plotName, NC_0_1:PPARG_6_3) %>% gather("Sample", "TPM", 2:ncol(.)) %>% 
+    separate(Sample, into = c("siRNA", "Day", "Replicate"), sep = "\\_") %>%
+    mutate(siRNA = paste0('si', siRNA), Day = as.numeric(Day)) %>%
+    filter(siRNA %in% input$siRNA, Day %in% input$time)
   
+  return(df)
 }
-
-# Searches the GN_Syn column for all matching GNs
-# and returns the filtered df
 
