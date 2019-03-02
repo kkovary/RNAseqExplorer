@@ -19,7 +19,8 @@ shinyServer(function(input, output) {
   
   # Formats the data for plotting
   datasetInput <- reactive({
-    geneSearch(geneNames()) %>% filter(siRNA %in% input$siRNA, Day %in% input$time)
+    geneSearch(geneNames(), geneSyns, normalized_data_genelevel_tpm) %>% 
+      filter(siRNA %in% input$siRNA, Day %in% input$time)
   })
   
   # Formats the data for table output
