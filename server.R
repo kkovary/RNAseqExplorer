@@ -3,77 +3,23 @@ library(dplyr)
 library(readr)
 library(ggplot2)
 library(tidyr)
+source('code/functions.R')
 
 # Read in data
 normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
+geneSyns = read_csv('data/GeneNames.csv')
 
-# Define UI ----
-ui <- fluidPage(
-  titlePanel(strong("RNA-seq Time Course Plots")),
-  h6(em("Atefeh Rabiee, Nathan Abell, Mary N. Teruel")),
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("plot_type", "Plot Type:", c("Mean","Loess")),
-      textOutput("result"),
-      
-      checkboxGroupInput("siRNA", "siRNA Data to Plot:",
-                         c("siCtrl" = "siNC","siPPARg" = "siPPARG"),
-                         selected = c("siNC","siPPARG"),
-                         inline = TRUE),
-      
-      checkboxGroupInput("time", "Time Points to Plot (Days):",
-                         c("0" = 0,"0.5" = 0.5, "1" = 1, "2" = 2, 
-                           "3" = 3, "4" = 4, "5" = 5, "6" = 6),
-                         selected = c(0,0.5,1,2,3,4,5,6),
-                         inline = TRUE),
-      
-      textInput("genes", "Genes (separate by space):", value = "Pparg"),
-      
-      actionButton('plot','Plot'),
-      
-      
-    h3(strong("Download")),
-    
-    # Download Plot Settings
-    h5("PDF Dimensions"),
-    splitLayout(
-      textInput("width", "Width (in)", value = 10),
-      textInput("height", "Height (in)", value = 5)
-    ),
-    
-    downloadButton("downloadPlot", "Export plot as PDF"),
-    
-    # Download Data Settings
-    downloadButton("downloadData", "Export table as CSV")
-      
-      
-    ),
-    
-    mainPanel(
-      plotOutput("plot"),
-      tableOutput("table")
-    )
-  )
-)
-
-# Define server logic ----
-server <- function(input, output) {
-  
+shinyServer(function(input, output) {
+   
   # Reads genes and formats them when plot buttion is pushed
   geneNames <- reactive({
-    
     input$plot
     isolate(input$genes %>% strsplit(' ') %>% unlist() %>% tolower())
   })
   
   # Formats the data for plotting
   datasetInput <- reactive({
-    
-    plot_data = filter(normalized_data_genelevel_tpm, tolower(GeneName) %in% geneNames()) %>%
-      gather("Sample", "TPM", 2:ncol(.)) %>% 
-      separate(Sample, into = c("siRNA", "Day", "Replicate"), sep = "\\_") %>%
-      mutate(siRNA = paste0('si', siRNA), Day = as.numeric(Day)) %>%
-      filter(siRNA %in% input$siRNA, Day %in% input$time)
+    geneSearch(geneNames()) %>% filter(siRNA %in% input$siRNA, Day %in% input$time)
   })
   
   # Formats the data for table output
@@ -88,7 +34,7 @@ server <- function(input, output) {
     as.data.frame(mat) %>% separate(Sample, into = c("Day","Replicate"), sep = "\\_")
   })
   
-
+  
   # Defines the different plots
   datasetPlot <- reactive({
     if(input$plot_type == 'Loess'){
@@ -114,7 +60,7 @@ server <- function(input, output) {
   
   # Plot Data  
   output$plot <- renderPlot({
-   
+    
     datasetPlot()
     
   })
@@ -147,7 +93,5 @@ server <- function(input, output) {
       write.csv(tableFormat(), file, row.names = FALSE)
     }
   )
-}
-
-# Run the app ----
-shinyApp(ui = ui, server = server)
+  
+})
