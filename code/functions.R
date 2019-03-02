@@ -10,10 +10,9 @@ geneSearch <- function(searchList){
                                                            paste0(GN_Syn,' (',GeneName,')')))
   
   df = df %>% inner_join(normalized_data_genelevel_tpm, ., by = 'GeneName') %>%
-    select(plotName, NC_0_1:PPARG_6_3) %>% gather("Sample", "TPM", 2:ncol(.)) %>% 
+    select(plotName, NC_0_1:PPARG_6_3) %>% dplyr::rename(GeneName = plotName) %>% gather("Sample", "TPM", 2:ncol(.)) %>% 
     separate(Sample, into = c("siRNA", "Day", "Replicate"), sep = "\\_") %>%
-    mutate(siRNA = paste0('si', siRNA), Day = as.numeric(Day)) %>%
-    filter(siRNA %in% input$siRNA, Day %in% input$time)
+    mutate(siRNA = paste0('si', siRNA), Day = as.numeric(Day))
   
   return(df)
 }
