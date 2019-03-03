@@ -16,4 +16,4 @@ sudo git clone https://github.com/kkovary/RNA-seq_Plot.git /srv/shiny-server/app
 - sudo rm -r RNAseq
 - sudo cp -r Desktop/app_180403.R /srv/shiny-server/apps/RNAseq/app.R
 - sudo systemctl restart shiny-server
-- sudo su -     -c "R -e \"install.packages(c('ggplot2'), repos='http://cran.rstudio.com/')\""
+- sudo su - -c "R -q -e \"install.packages('mypackage', repos='http://cran.rstudio.com/')\""
