@@ -55,6 +55,7 @@ shinyUI(
                           )
                         )
                       ),
-             tabPanel('Volcano Plots')
+             tabPanel('Volcano Plots',
+                      sidebarPanel())
              )
   )
