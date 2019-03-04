@@ -67,7 +67,20 @@ shinyUI(
                         tags$p('Select the pvalue and fold change cutoff'),
                         numericInput('pvalCut', 'pvalue Cutoff', value = 0.05, min = 0, max = 1, step = 0.01),
                         numericInput('fcCut', 'Fold Change Cutoff', value = 2, step = 0.25),
-                        actionButton('volPlotButton','Plot')
+                        actionButton('volPlotButton','Plot'),
+                        tags$hr(),
+                        tags$p(strong('Download')),
+                        h5("PDF Dimensions"),
+                        splitLayout(
+                          textInput("volWidth", "Width (in)", value = 10),
+                          textInput("volHeight", "Height (in)", value = 5)
+                        ),
+                        
+                        downloadButton("volDownloadPlot", "Export plot as PDF"),
+                        
+                        # Download Data Settings
+                        downloadButton("volDownloadData", "Export table as CSV")
+                        
                       ),
                       mainPanel(
                         plotOutput("volPlot"),
