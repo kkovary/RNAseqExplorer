@@ -31,23 +31,6 @@ volPlotDataFun <- function(numerator, denominator, data, pvalueCut, foldChangeCu
   
 }
 
-
-df = data %>% gather(key = 'Condition', value = 'TPM', 2:ncol(data)) %>%
-  separate(Condition, into = c('siRNA','Day','Replicate')) %>%
-  unite('Condition', c('siRNA','Day'))
-
-
-
-
-
-
-
-
-
-
-
-
-
 convertUniprot <- function(csvFilepath){
   # This function reads in a csv file of gene/protein names
   # and organizes them to be used with this app to be read

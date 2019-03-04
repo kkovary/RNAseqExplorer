@@ -1,5 +1,6 @@
 library(shiny)
 source('code/functions.R')
+volData = read_csv('data/volData.csv')
 
 shinyUI(
   navbarPage('RNAseqExplorer',
