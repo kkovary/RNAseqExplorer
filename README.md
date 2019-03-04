@@ -2,6 +2,11 @@
 
 This is a Shiny App that plots RNA-seq data
 
+# Features
+- Plot time courses of multiple genes of transcripts per million
+- Volcano plots
+- Output plots and data files
+
 # To Update Shiny Server, type into terminal:
 
 1) cd /srv/shiny-server/apps/RNAseq/
@@ -21,9 +26,5 @@ sudo git clone https://github.com/kkovary/RNA-seq_Plot.git /srv/shiny-server/app
 # Features to add
 - Transcript variant plots
 - Add data points to plot
-- Second tab with volcano plots
-  - Choose x/y for ratio
-  - Choose pvalue and fold change cutoff
-  - Export plot and table
 - Sliders for error bar and point sizes
 - Fold change plots (over D0 or siRNA)
