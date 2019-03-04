@@ -17,3 +17,13 @@ sudo git clone https://github.com/kkovary/RNA-seq_Plot.git /srv/shiny-server/app
 - sudo cp -r Desktop/app_180403.R /srv/shiny-server/apps/RNAseq/app.R
 - sudo systemctl restart shiny-server
 - sudo su - -c "R -q -e \"install.packages('mypackage', repos='http://cran.rstudio.com/')\""
+
+# Features to add
+- Transcript variant plots
+- Add data points to plot
+- Second tab with volcano plots
+  - Choose x/y for ratio
+  - Choose pvalue and fold change cutoff
+  - Export plot and table
+- Sliders for error bar and point sizes
+- Fold change plots (over D0 or siRNA)
