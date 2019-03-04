@@ -70,8 +70,8 @@ shinyUI(
                         actionButton('volPlotButton','Plot')
                       ),
                       mainPanel(
-                        #verbatimTextOutput("head"),
-                        plotOutput("volPlot")
+                        plotOutput("volPlot"),
+                        verbatimTextOutput("head")
                       )
                       )
              )
