@@ -56,6 +56,23 @@ shinyUI(
                         )
                       ),
              tabPanel('Volcano Plots',
-                      sidebarPanel())
+                      sidebarPanel(
+                        tags$p("To create volcano plots, select two conditions to compare.
+                               For example, to see how genes are differentially expressed
+                               from day 0 to day 6, select siNC_6 as the numerator, and siNC_0
+                               as the denominator."),
+                        selectInput("volNumerator", "Numerator:", choices = c(NA,unique(volData$Condition)), selected = 'NC_6'),
+                        selectInput("volDenominator", "Denominator:", choices = c(NA,unique(volData$Condition)), selected = 'NC_0'),
+                        tags$hr(),
+                        tags$p('Select the pvalue and fold change cutoff'),
+                        numericInput('pvalCut', 'pvalue Cutoff', value = 0.05, min = 0, max = 1, step = 0.01),
+                        numericInput('fcCut', 'Fold Change Cutoff', value = 2, step = 0.25),
+                        actionButton('volPlotButton','Plot')
+                      ),
+                      mainPanel(
+                        #verbatimTextOutput("head"),
+                        plotOutput("volPlot")
+                      )
+                      )
              )
   )
