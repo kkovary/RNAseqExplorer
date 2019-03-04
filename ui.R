@@ -60,6 +60,8 @@ shinyUI(
                       ),
              tabPanel('Volcano Plots',
                       sidebarPanel(
+                        h6(strong('Please be patient,'), em('it may take a minute to display the plot.')),
+                        tags$hr(),
                         tags$p("To create volcano plots, select two conditions to compare.
                                For example, to see how genes are differentially expressed
                                from day 0 to day 6, select NC_6 as the numerator, and NC_0
