@@ -56,6 +56,37 @@ shinyUI(
                         )
                       ),
              tabPanel('Volcano Plots',
-                      sidebarPanel())
+                      sidebarPanel(
+                        tags$p("To create volcano plots, select two conditions to compare.
+                               For example, to see how genes are differentially expressed
+                               from day 0 to day 6, select NC_6 as the numerator, and NC_0
+                               as the denominator (NC is non-targeting siRNA, PPARG is 
+                               Pparg targeting siRNA."),
+                        selectInput("volNumerator", "Numerator:", choices = c(NA,unique(volData$Condition)), selected = 'NC_6'),
+                        selectInput("volDenominator", "Denominator:", choices = c(NA,unique(volData$Condition)), selected = 'NC_0'),
+                        tags$hr(),
+                        tags$p('Select the pvalue and fold change cutoff'),
+                        numericInput('pvalCut', 'pvalue Cutoff', value = 0.05, min = 0, max = 1, step = 0.01),
+                        numericInput('fcCut', 'Fold Change Cutoff', value = 2, step = 0.25),
+                        actionButton('volPlotButton','Plot'),
+                        tags$hr(),
+                        tags$p(strong('Download')),
+                        h5("PDF Dimensions"),
+                        splitLayout(
+                          textInput("volWidth", "Width (in)", value = 10),
+                          textInput("volHeight", "Height (in)", value = 5)
+                        ),
+                        
+                        downloadButton("volDownloadPlot", "Export plot as PDF"),
+                        
+                        # Download Data Settings
+                        downloadButton("volDownloadData", "Export table as CSV")
+                        
+                      ),
+                      mainPanel(
+                        plotOutput("volPlot"),
+                        verbatimTextOutput("head")
+                      )
+                      )
              )
   )

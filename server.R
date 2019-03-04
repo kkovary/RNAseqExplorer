@@ -6,6 +6,7 @@ source('code/functions.R')
 # Read in data
 normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
 geneSyns = read_csv('data/GeneNames.csv')
+volData = read_csv('data/volData.csv')
 
 shinyServer(function(input, output) {
    
@@ -90,6 +91,46 @@ shinyServer(function(input, output) {
     },
     content = function(file) {
       write.csv(tableFormat(), file, row.names = FALSE)
+    }
+  )
+  
+  # Volcano Plot
+  volPlotData <- reactive({
+    volPlotDataFun(input$volNumerator, input$volDenominator, volData, input$pvalCut, input$fcCut) %>%
+      filter(!is.na(Hit))
+  })
+  
+  output$volPlot <- renderPlot({
+    ggplot(volPlotData(), aes(x = log2(foldChange), y = -log10(pvalue), colour = Hit)) + 
+      geom_vline(xintercept = log2(c(input$fcCut, 1/input$fcCut)), colour = 'red', linetype = 'dashed') + 
+      geom_hline(yintercept = -log10(input$pvalCut), colour = 'red', linetype = 'dashed') + 
+      geom_point(alpha = 0.25) + theme_bw() + scale_color_manual(values = c('#bababa','#e08214')) +
+      theme(legend.position="none")
+  })
+  output$head <- renderPrint(
+      volPlotData() %>% head()
+    )
+  # Download PDF of Volcano Plot
+  output$volDownloadPlot <-downloadHandler(
+    filename = function() {
+      paste(input$volNumerator,' vs ',input$volDenominator, ".pdf", sep = "")
+    },
+    content = function(file){
+      #x = plotDims()
+      renderPlot({
+        volPlot()
+      })
+      ggsave(file, width = plotDims()[1], height = plotDims()[2], units = c('in'))
+    }
+  )
+  
+  # Downloadable csv Volcano Plot
+  output$volDownloadData <- downloadHandler(
+    filename = function() {
+      paste(input$volNumerator,' vs ',input$volDenominator, ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv(volPlotData(), file, row.names = FALSE)
     }
   )
   
