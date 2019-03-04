@@ -21,13 +21,13 @@ convertUniprot <- function(csvFilepath){
   # This function reads in a csv file of gene/protein names
   # and organizes them to be used with this app to be read
   # in as 'geneSyns'.
+  require(readxl)
   
   read_xlsx(csvFilepath) %>% select(Entry, `Gene names  (primary )`, `Gene names`) %>% 
     rename(GeneName = `Gene names  (primary )`, GN_Syn = `Gene names`) %>%
-    mutate(GN_Syn = strsplit(GN_Syn, ' ')) %>% 
+    mutate(GeneName = strsplit(GeneName, '; ')) %>% unnest() %>% mutate(GN_Syn = strsplit(GN_Syn, ' ')) %>% 
     unnest() %>% filter(!duplicated(tolower(GN_Syn))) %>% 
+    
     write_csv(path = paste0(getwd(),'/Data/GeneNames.csv'))
 }
-
-
 

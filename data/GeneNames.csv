@@ -4924,9 +4924,9 @@ Q9QXT0,Cnpy2,Tmem4
 Q9QXT0,Cnpy2,Zsig9
 Q8BQ47,Cnpy4,Cnpy4
 Q8BQ47,Cnpy4,Prat4b
-Q9JMA7,Cyp3a41a; Cyp3a41b,Cyp3a41a
-Q9JMA7,Cyp3a41a; Cyp3a41b,Cyp3a41;
-Q9JMA7,Cyp3a41a; Cyp3a41b,Cyp3a41b
+Q9JMA7,Cyp3a41a,Cyp3a41a
+Q9JMA7,Cyp3a41a,Cyp3a41;
+Q9JMA7,Cyp3a41a,Cyp3a41b
 Q8K0C4,Cyp51a1,Cyp51a1
 Q8K0C4,Cyp51a1,Cyp51
 Q7TN99,Cpeb3,Cpeb3
@@ -6447,10 +6447,10 @@ Q80Y98,Ddhd2,Samwd1
 Q99LD8,Ddah2,Ddah2
 Q4FZF3,Ddx49,Ddx49
 Q91V82,Defb8,Defb8
-P50704,Defa6; Defa12,Defa6
-P50704,Defa6; Defa12,Defcr6;
-P50704,Defa6; Defa12,Defa12
-P50704,Defa6; Defa12,Defcr12
+P50704,Defa6,Defa6
+P50704,Defa6,Defcr6;
+P50704,Defa6,Defa12
+P50704,Defa6,Defcr12
 P50171,Hsd17b8,Hsd17b8
 P50171,Hsd17b8,H2-Ke6
 P50171,Hsd17b8,Hke6
@@ -7226,27 +7226,27 @@ Q8R507,Fktn,Fktn
 Q8R507,Fktn,Fcmd
 Q9D1M7,Fkbp11,Fkbp11
 Q80X90,Flnb,Flnb
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,Hist1h3b
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,H3-53
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,H3.2
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,H3b;
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,Hist1h3c
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,H3-143;
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,Hist1h3d
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,H3-B;
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,Hist1h3e
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,H3-F;
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,Hist1h3f
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,H3.2-221
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,H3f;
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,Hist2h3b
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,H3.2-616;
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,Hist2h3c1
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,H3.2-615
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,Hist2h3ca1;
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,Hist2h3c2
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,H3.2-614
-P84228,Hist1h3b; Hist1h3c; Hist1h3d; Hist1h3e; Hist1h3f; Hist2h3b; Hist2h3c1; Hist2h3c2,Hist2h3ca2
+P84228,Hist1h3b,Hist1h3b
+P84228,Hist1h3b,H3-53
+P84228,Hist1h3b,H3.2
+P84228,Hist1h3b,H3b;
+P84228,Hist1h3b,Hist1h3c
+P84228,Hist1h3b,H3-143;
+P84228,Hist1h3b,Hist1h3d
+P84228,Hist1h3b,H3-B;
+P84228,Hist1h3b,Hist1h3e
+P84228,Hist1h3b,H3-F;
+P84228,Hist1h3b,Hist1h3f
+P84228,Hist1h3b,H3.2-221
+P84228,Hist1h3b,H3f;
+P84228,Hist1h3b,Hist2h3b
+P84228,Hist1h3b,H3.2-616;
+P84228,Hist1h3b,Hist2h3c1
+P84228,Hist1h3b,H3.2-615
+P84228,Hist1h3b,Hist2h3ca1;
+P84228,Hist1h3b,Hist2h3c2
+P84228,Hist1h3b,H3.2-614
+P84228,Hist1h3b,Hist2h3ca2
 Q8R0F8,Fahd1,Fahd1
 Q8R0F8,Fahd1,MNCb-4134
 Q5XJY6,Fancb,Fancb
@@ -12236,10 +12236,10 @@ Q9WVA4,Tagln2,Tagln2
 Q9WVA4,Tagln2,Kiaa0120
 Q6PDZ2,Taf1c,Taf1c
 Q8R1G1,Tasp1,Tasp1
-P05214,Tuba3a; Tuba3b,Tuba3a
-P05214,Tuba3a; Tuba3b,Tuba3;
-P05214,Tuba3a; Tuba3b,Tuba3b
-P05214,Tuba3a; Tuba3b,Tuba7
+P05214,Tuba3a,Tuba3a
+P05214,Tuba3a,Tuba3;
+P05214,Tuba3a,Tuba3b
+P05214,Tuba3a,Tuba7
 Q8R3D1,Tbc1d13,Tbc1d13
 Q8CIV8,Tbce,Tbce
 O70306,Tbx15,Tbx15
@@ -16907,8 +16907,8 @@ Q9CQS7,Dppa5a,Dppa5
 Q9CQS7,Dppa5a,Ecat2
 Q9CQS7,Dppa5a,Esg1
 Q9CQS7,Dppa5a,Ph34
-P85965,Dppa5b; Dppa5c,Dppa5b;
-P85965,Dppa5b; Dppa5c,Dppa5c
+P85965,Dppa5b,Dppa5b;
+P85965,Dppa5b,Dppa5c
 Q9WUQ7,Dexi,Dexi
 Q9WUQ7,Dexi,Myle
 Q61488,Dhh,Dhh
@@ -19167,9 +19167,9 @@ Q8R1M2,H2afj,H2afj
 C0HKE9,Hist1h2ap,Hist1h2ap
 P70696,Hist1h2ba,Hist1h2ba
 P70696,Hist1h2ba,Th2b
-Q6ZWY9,Hist1h2bc; Hist1h2be; Hist1h2bg,Hist1h2bc;
-Q6ZWY9,Hist1h2bc; Hist1h2be; Hist1h2bg,Hist1h2be;
-Q6ZWY9,Hist1h2bc; Hist1h2be; Hist1h2bg,Hist1h2bg
+Q6ZWY9,Hist1h2bc,Hist1h2bc;
+Q6ZWY9,Hist1h2bc,Hist1h2be;
+Q6ZWY9,Hist1h2bc,Hist1h2bg
 Q3U2K5,Kdm4d,Kdm4d
 Q3U2K5,Kdm4d,Jhdm3d
 Q3U2K5,Kdm4d,Jmjd2d
@@ -27134,13 +27134,13 @@ P59997,Kdm2a,Fbxl11
 P59997,Kdm2a,Jhdm1a
 P59997,Kdm2a,Kiaa1004
 C0HKE6,Hist1h2ai,Hist1h2ai
-Q5M8Q2,H2al1a; H2al1c; H2al1d; H2al1f; H2al1g; H2al1h; H2al1i,H2al1a;
-Q5M8Q2,H2al1a; H2al1c; H2al1d; H2al1f; H2al1g; H2al1h; H2al1i,H2al1c;
-Q5M8Q2,H2al1a; H2al1c; H2al1d; H2al1f; H2al1g; H2al1h; H2al1i,H2al1d;
-Q5M8Q2,H2al1a; H2al1c; H2al1d; H2al1f; H2al1g; H2al1h; H2al1i,H2al1f;
-Q5M8Q2,H2al1a; H2al1c; H2al1d; H2al1f; H2al1g; H2al1h; H2al1i,H2al1g;
-Q5M8Q2,H2al1a; H2al1c; H2al1d; H2al1f; H2al1g; H2al1h; H2al1i,H2al1h;
-Q5M8Q2,H2al1a; H2al1c; H2al1d; H2al1f; H2al1g; H2al1h; H2al1i,H2al1i
+Q5M8Q2,H2al1a,H2al1a;
+Q5M8Q2,H2al1a,H2al1c;
+Q5M8Q2,H2al1a,H2al1d;
+Q5M8Q2,H2al1a,H2al1f;
+Q5M8Q2,H2al1a,H2al1g;
+Q5M8Q2,H2al1a,H2al1h;
+Q5M8Q2,H2al1a,H2al1i
 Q8BW72,Kdm4a,Kdm4a
 Q8BW72,Kdm4a,Jhdm3a
 Q8BW72,Kdm4a,Jmjd2
@@ -27188,21 +27188,21 @@ Q6P1G2,Kdm2b,Kiaa3014
 Q8CGP7,Hist1h2ak,Hist1h2ak
 Q8CGP0,Hist3h2bb,Hist3h2bb
 Q8CGP0,Hist3h2bb,Hist3h2bb-ps
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist1h4a;
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist1h4b
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,H4-53;
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist1h4c
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,H4-12;
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist1h4d;
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist1h4f;
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist1h4h;
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist1h4i;
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist1h4j;
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist1h4k;
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist1h4m;
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist2h4a
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist2h4;
-P62806,Hist1h4a; Hist1h4b; Hist1h4c; Hist1h4d; Hist1h4f; Hist1h4h; Hist1h4i; Hist1h4j; Hist1h4k; Hist1h4m; Hist2h4a; Hist4h4,Hist4h4
+P62806,Hist1h4a,Hist1h4a;
+P62806,Hist1h4a,Hist1h4b
+P62806,Hist1h4a,H4-53;
+P62806,Hist1h4a,Hist1h4c
+P62806,Hist1h4a,H4-12;
+P62806,Hist1h4a,Hist1h4d;
+P62806,Hist1h4a,Hist1h4f;
+P62806,Hist1h4a,Hist1h4h;
+P62806,Hist1h4a,Hist1h4i;
+P62806,Hist1h4a,Hist1h4j;
+P62806,Hist1h4a,Hist1h4k;
+P62806,Hist1h4a,Hist1h4m;
+P62806,Hist1h4a,Hist2h4a
+P62806,Hist1h4a,Hist2h4;
+P62806,Hist1h4a,Hist4h4
 Q9JIY2,Cbll1,Cbll1
 Q9JIY2,Cbll1,Hakai
 P14483,H2-Ab1,H2-iabeta
@@ -27210,8 +27210,8 @@ Q8VC19,Alas1,Alas1
 Q9CY28,Gtpbp8,Gtpbp8
 P43276,Hist1h1b,Hist1h1b
 P43276,Hist1h1b,H1f5
-Q6GSS7,Hist2h2aa1; Hist2h2aa2,Hist2h2aa1;
-Q6GSS7,Hist2h2aa1; Hist2h2aa2,Hist2h2aa2
+Q6GSS7,Hist2h2aa1,Hist2h2aa1;
+Q6GSS7,Hist2h2aa1,Hist2h2aa2
 Q6PCM1,Kdm3a,Kdm3a
 Q6PCM1,Kdm3a,Jhdm2a
 Q6PCM1,Kdm3a,Jmjd1a
@@ -27228,10 +27228,10 @@ Q64524,Hist2h2be,Hist2h2be
 P10854,Hist1h2bm,Hist1h2bm
 P02301,H3f3c,H3f3c
 P02301,H3f3c,Gm14384
-P84244,H3f3a; H3f3b,H3f3a
-P84244,H3f3a; H3f3b,H3.3a;
-P84244,H3f3a; H3f3b,H3f3b
-P84244,H3f3a; H3f3b,H3.3b
+P84244,H3f3a,H3f3a
+P84244,H3f3a,H3.3a;
+P84244,H3f3a,H3f3b
+P84244,H3f3a,H3.3b
 P01898,H2-Q10,H2-Q10
 Q8K0D2,Habp2,Habp2
 Q8K0D2,Habp2,Phbp
@@ -27295,14 +27295,14 @@ A2A9F4,Kdf1,Kdf1
 Q8BFU2,Hist3h2a,Hist3h2a
 C0HKE2,Hist1h2ac,Hist1h2ac
 Q9QZQ8,H2afy,H2afy
-P10853,Hist1h2bf; Hist1h2bj; Hist1h2bl; Hist1h2bn,Hist1h2bf
-P10853,Hist1h2bf; Hist1h2bj; Hist1h2bl; Hist1h2bn,H2b-f;
-P10853,Hist1h2bf; Hist1h2bj; Hist1h2bl; Hist1h2bn,Hist1h2bj
-P10853,Hist1h2bf; Hist1h2bj; Hist1h2bl; Hist1h2bn,H2b-j;
-P10853,Hist1h2bf; Hist1h2bj; Hist1h2bl; Hist1h2bn,Hist1h2bl
-P10853,Hist1h2bf; Hist1h2bj; Hist1h2bl; Hist1h2bn,H2b-l;
-P10853,Hist1h2bf; Hist1h2bj; Hist1h2bl; Hist1h2bn,Hist1h2bn
-P10853,Hist1h2bf; Hist1h2bj; Hist1h2bl; Hist1h2bn,H2b-n
+P10853,Hist1h2bf,Hist1h2bf
+P10853,Hist1h2bf,H2b-f;
+P10853,Hist1h2bf,Hist1h2bj
+P10853,Hist1h2bf,H2b-j;
+P10853,Hist1h2bf,Hist1h2bl
+P10853,Hist1h2bf,H2b-l;
+P10853,Hist1h2bf,Hist1h2bn
+P10853,Hist1h2bf,H2b-n
 P41230,Kdm5c,Kdm5c
 P41230,Kdm5c,Jarid1c
 P41230,Kdm5c,Kiaa0234
@@ -27312,17 +27312,17 @@ Q62240,Kdm5d,Kdm5d
 Q62240,Kdm5d,Hya
 Q62240,Kdm5d,Jarid1d
 Q62240,Kdm5d,Smcy
-P68433,Hist1h3a; Hist1h3g; Hist1h3h; Hist1h3i,Hist1h3a
-P68433,Hist1h3a; Hist1h3g; Hist1h3h; Hist1h3i,H3a;
-P68433,Hist1h3a; Hist1h3g; Hist1h3h; Hist1h3i,Hist1h3g
-P68433,Hist1h3a; Hist1h3g; Hist1h3h; Hist1h3i,H3.1-221
-P68433,Hist1h3a; Hist1h3g; Hist1h3h; Hist1h3i,H3g;
-P68433,Hist1h3a; Hist1h3g; Hist1h3h; Hist1h3i,Hist1h3h
-P68433,Hist1h3a; Hist1h3g; Hist1h3h; Hist1h3i,H3.1-291
-P68433,Hist1h3a; Hist1h3g; Hist1h3h; Hist1h3i,H3h;
-P68433,Hist1h3a; Hist1h3g; Hist1h3h; Hist1h3i,Hist1h3i
-P68433,Hist1h3a; Hist1h3g; Hist1h3h; Hist1h3i,H3.1-I
-P68433,Hist1h3a; Hist1h3g; Hist1h3h; Hist1h3i,H3i
+P68433,Hist1h3a,Hist1h3a
+P68433,Hist1h3a,H3a;
+P68433,Hist1h3a,Hist1h3g
+P68433,Hist1h3a,H3.1-221
+P68433,Hist1h3a,H3g;
+P68433,Hist1h3a,Hist1h3h
+P68433,Hist1h3a,H3.1-291
+P68433,Hist1h3a,H3h;
+P68433,Hist1h3a,Hist1h3i
+P68433,Hist1h3a,H3.1-I
+P68433,Hist1h3a,H3i
 Q3UHX2,Pdap1,Pdap1
 Q8BY71,Hat1,Hat1
 Q8BKT8,Haus7,Haus7
