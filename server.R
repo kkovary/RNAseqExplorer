@@ -6,7 +6,6 @@ source('code/functions.R')
 # Read in data
 normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
 geneSyns = read_csv('data/GeneNames.csv')
-
 volData = read_csv('data/volData.csv')
 
 shinyServer(function(input, output) {
@@ -102,7 +101,6 @@ shinyServer(function(input, output) {
   })
   
   output$volPlot <- renderPlot({
-    data = volPlotData() %>% sample_n(100)
     ggplot(volPlotData(), aes(x = log2(foldChange), y = -log10(pvalue), colour = Hit)) + geom_point(alpha = 0.25) +
       theme_bw() + scale_color_manual(values = c('#bababa','#e08214'))
   })
