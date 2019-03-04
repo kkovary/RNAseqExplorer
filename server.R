@@ -8,6 +8,7 @@ normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv
 geneSyns = read_csv('data/GeneNames.csv')
 volData = read_csv('data/volData.csv')
 
+
 shinyServer(function(input, output) {
    
   # Reads genes and formats them when plot buttion is pushed
