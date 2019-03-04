@@ -21,7 +21,6 @@ convertUniprot <- function(csvFilepath){
   # This function reads in a csv file of gene/protein names
   # and organizes them to be used with this app to be read
   # in as 'geneSyns'.
-  require(readxl)
   
   read_xlsx(csvFilepath) %>% select(Entry, `Gene names  (primary )`, `Gene names`) %>% 
     rename(GeneName = `Gene names  (primary )`, GN_Syn = `Gene names`) %>%

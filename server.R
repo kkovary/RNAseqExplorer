@@ -1,9 +1,6 @@
 library(shiny)
-#library(dplyr)
-#library(readr)
-#library(ggplot2)
-#library(tidyr)
 library(tidyverse)
+library(readxl)
 source('code/functions.R')
 
 # Read in data
