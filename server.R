@@ -5,7 +5,7 @@ source('code/functions.R')
 
 # Read in data
 normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
-geneSyns = read_tsv('data/GeneNames.tsv')
+geneSyns = read_csv('data/GeneNames.csv')
 
 shinyServer(function(input, output) {
    
