@@ -1,5 +1,7 @@
 library(shiny)
+library(readr)
 source('code/functions.R')
+
 volData = read_csv('data/volData.csv')
 
 shinyUI(
