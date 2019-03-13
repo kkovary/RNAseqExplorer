@@ -22,3 +22,4 @@ This is a Shiny App that plots RNA-seq data
 - Add data points to plot
 - Sliders for error bar and point sizes
 - Fold change plots (over D0 or siRNA)
+- Separate program idea: Shiny interface for setting up Kallisto analysis, run local or on server
