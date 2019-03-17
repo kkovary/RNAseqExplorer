@@ -75,7 +75,7 @@ shinyServer(function(input, output) {
       renderPlot({
         datasetPlot()
       })
-      ggsave(file, width = plotDims()[1], height = plotDims()[2], units = c('in'))
+      ggsave(file, width = plotDims()[1], height = plotDims()[2], units = c('in'), useDingbats=FALSE)
     }
   )
   
