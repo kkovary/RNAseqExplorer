@@ -8,7 +8,7 @@ This is a Shiny App that plots RNA-seq data
 - Output plots and data files
 
 # To Update Shiny Server, type into terminal:
-1) sudo rm -r /srv/shiny-server/apps/RNAseq
+1) sudo rm -r /srv/shiny-server/apps/RNAseqExplorer
 2) sudo git clone https://github.com/kkovary/RNAseqExplorer.git /srv/shiny-server/apps/
 3) sudo systemctl restart shiny-server
 
