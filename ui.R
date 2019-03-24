@@ -12,6 +12,7 @@ shinyUI(
                         titlePanel(strong("RNA-seq Time Course Plots")),
                         h6(em("Atefeh Rabiee, Nathan Abell, Mary N. Teruel")),
                         selectInput("plot_type", "Plot Type:", c("Mean","Loess")),
+                        sliderInput('pointSize', 'Point Size', min = 0, max = 5, value = 2.5, step = 0.1),
                         textOutput("result"),
                         
                         checkboxGroupInput("siRNA", "siRNA Data to Plot:",
