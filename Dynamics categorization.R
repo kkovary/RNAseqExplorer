@@ -51,10 +51,10 @@ cat_quant <- norm %>% group_by(GeneName) %>%
     #Ins Section
     ins_siRNA_fc = mean(tpm[siRNA == 'NC' & day %in% ins], na.rm = T) / mean(tpm[siRNA == 'PPARG' & day %in% ins], na.rm = T),
     ins_siRNA_pval = t.test(tpm[siRNA == 'NC' & day %in% ins], tpm[siRNA == 'PPARG' & day %in% ins])$p.value,
-    ins_NC_fc = mean(tpm[siRNA == 'NC' & day %in% ins], na.rm = T) / mean(tpm[siRNA == 'NC' & day == dm], na.rm = T),
-    ins_NC_pval = t.test(tpm[siRNA == 'NC' & day %in% ins], tpm[siRNA == 'NC' & day == dm])$p.value,
-    ins_PPARG_fc = mean(tpm[siRNA == 'PPARG' & day %in% ins], na.rm = T) / mean(tpm[siRNA == 'PPARG' & day == dm], na.rm = T),
-    ins_PPARG_pval = t.test(tpm[siRNA == 'PPARG' & day %in% ins], tpm[siRNA == 'PPARG' & day == dm])$p.value
+    ins_NC_fc = mean(tpm[siRNA == 'NC' & day %in% ins], na.rm = T) / mean(tpm[siRNA == 'NC' & day %in% dm], na.rm = T),
+    ins_NC_pval = t.test(tpm[siRNA == 'NC' & day %in% ins], tpm[siRNA == 'NC' & day %in% dm])$p.value,
+    ins_PPARG_fc = mean(tpm[siRNA == 'PPARG' & day %in% ins], na.rm = T) / mean(tpm[siRNA == 'PPARG' & day %in% dm], na.rm = T),
+    ins_PPARG_pval = t.test(tpm[siRNA == 'PPARG' & day %in% ins], tpm[siRNA == 'PPARG' & day %in% dm])$p.value
   ) %>% pivot_longer(cols = d0_siRNA_fc:ins_PPARG_pval, names_to = 'stat', values_to = 'value') %>%
   separate(stat, into = c('time','comparison','stat')) %>%
   unite('condition', time:comparison) %>%
@@ -73,6 +73,8 @@ cat_quant <- norm %>% group_by(GeneName) %>%
 
 cat_quant_long <- cat_quant %>% select(-fc, -pval, -p.adj) %>%
   pivot_wider(names_from = condition, values_from = exp_cat) %>% drop_na()
+
+write_csv(cat_quant_long, 'data/cat_quant_long.csv')
 
 cat_quant_long_sum <- cat_quant %>% select(-fc, -pval, -p.adj) %>%
   pivot_wider(names_from = condition, values_from = exp_cat) %>% drop_na() %>%
