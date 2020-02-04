@@ -1,0 +1,512 @@
+read_xlsx(csvFilepath) %>% select(Entry, `Gene names  (primary )`, `Gene names`) %>%
+rename(GeneName = `Gene names  (primary )`, GN_Syn = `Gene names`) %>%
+mutate(GeneName = strsplit(GeneName, '; '), GN_Syn = strsplit(GN_Syn, ' ')) %>%
+unnest() %>% filter(!duplicated(tolower(GN_Syn))) %>%
+write_csv(path = paste0(getwd(),'/Data/GeneNames.csv'))
+}
+convertUniprot('/Users/kylekovary/Downloads/GeneNames.xlsx')
+convertUniprot <- function(csvFilepath){
+# This function reads in a csv file of gene/protein names
+# and organizes them to be used with this app to be read
+# in as 'geneSyns'.
+require(readxl)
+read_xlsx(csvFilepath) %>% select(Entry, `Gene names  (primary )`, `Gene names`) %>%
+rename(GeneName = `Gene names  (primary )`, GN_Syn = `Gene names`) %>%
+mutate(GeneName = strsplit(GeneName, '; '), GN_Syn = strsplit(GN_Syn, ' ')) %>%
+unnest() %>% filter(!duplicated(tolower(GN_Syn))) %>%
+write_csv(path = paste0(getwd(),'/Data/GeneNames.csv'))
+}
+convertUniprot('/Users/kylekovary/Downloads/GeneNames.xlsx')
+convertUniprot <- function(csvFilepath){
+# This function reads in a csv file of gene/protein names
+# and organizes them to be used with this app to be read
+# in as 'geneSyns'.
+require(readxl)
+read_xlsx(csvFilepath) %>% select(Entry, `Gene names  (primary )`, `Gene names`) %>%
+rename(GeneName = `Gene names  (primary )`, GN_Syn = `Gene names`) %>%
+mutate(GeneName = strsplit(GeneName, '; ')) %>% unnest() %>% mutate(GN_Syn = strsplit(GN_Syn, ' ')) %>%
+unnest() %>% filter(!duplicated(tolower(GN_Syn))) %>%
+write_csv(path = paste0(getwd(),'/Data/GeneNames.csv'))
+}
+convertUniprot('/Users/kylekovary/Downloads/GeneNames.xlsx')
+runApp()
+test
+geneSyns = read_csv('data/GeneNames.csv')
+class(geneSyns)
+dim(geneSyns)
+geneSyns
+?write_csv
+write_tsv(geneSyns, '/Users/kylekovary/Documents/GitHub/ShinyApps/RNAseqExplorer/data/GeneNames.tsv')
+runApp()
+runApp()
+runApp()
+?eval_tidy
+?rlang
+??rlang
+sessionInfo()
+runApp()
+runApp()
+runApp()
+shiny::runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+?textInput
+?numericInput
+runApp()
+runApp()
+runApp()
+# Read in data
+normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
+normalized_data_genelevel_tpm
+data = normalized_data_genelevel_tpm
+data
+df = data %>% gather(key = 'Condition', value = 'TPM', 2:nrow(data))
+?gather
+2:nrow(data)
+df = data %>% gather(key = 'Condition', value = 'TPM', 2:ncol(data))
+df
+?separate
+df = data %>% gather(key = 'Condition', value = 'TPM', 2:ncol(data)) %>%
+separate(Condition, into = c('siRNA','Day','Replicate'))
+df
+?unite
+df = data %>% gather(key = 'Condition', value = 'TPM', 2:ncol(data)) %>%
+separate(Condition, into = c('siRNA','Day','Replicate')) %>%
+unite('Condition', c('siRNA','Day'))
+df
+df = data %>% filter(Condition %in% c(numerator, denominator)) %>%
+group_by(GeneName) %>%
+summarise(foldChange = mean(TPM[Condition == numerator], na.rm = T) / mean(TPM[Condition == denominator], na.rm = T))
+data
+df
+df %>% filter(Condition %in% c(numerator, denominator)) %>%
+group_by(GeneName) %>%
+summarise(foldChange = mean(TPM[Condition == numerator], na.rm = T) / mean(TPM[Condition == denominator], na.rm = T))
+numerator = 'NC_6'
+denominator = 'NC_0'
+df %>% filter(Condition %in% c(numerator, denominator)) %>%
+group_by(GeneName) %>%
+summarise(foldChange = mean(TPM[Condition == numerator], na.rm = T) / mean(TPM[Condition == denominator], na.rm = T))
+nrow(normalized_data_genelevel_tpm)
+volPlotData <- function(numerator, denominator, data, pvalueCut, foldChangeCut){
+# This function takes in the RNAseq data, and calculates the fold change
+# and pvalue from two conditions (numerator and denominator) and labels
+# which genes are significant or not based on the user defined pvalue and
+# fold change cutoffs.
+data %>% filter(Condition %in% c(numerator, denominator)) %>%
+group_by(GeneName) %>%
+summarise(foldChange = mean(TPM[Condition == numerator], na.rm = T) / mean(TPM[Condition == denominator], na.rm = T),
+pvalue = t.test(TPM[Condition == numerator], na.rm = T) / t.test(TPM[Condition == denominator], na.rm = T)$p.value) %>%
+mutate(Hit = ifelse(pvalue >= -log10(pvalueCut) & abs(foldChange) >= foldChangeCut, TRUE, FALSE))
+}
+volData = normalized_data_genelevel_tpm %>%
+gather(key = 'Condition', value = 'TPM', 2:ncol(data)) %>%
+separate(Condition, into = c('siRNA','Day','Replicate')) %>%
+unite('Condition', c('siRNA','Day'))
+volPlotData('NC_6','NC_0',volData, 0.05, 2)
+volPlotData <- function(numerator, denominator, data, pvalueCut, foldChangeCut){
+# This function takes in the RNAseq data, and calculates the fold change
+# and pvalue from two conditions (numerator and denominator) and labels
+# which genes are significant or not based on the user defined pvalue and
+# fold change cutoffs.
+data %>% filter(Condition %in% c(numerator, denominator)) %>%
+group_by(GeneName) %>%
+summarise(foldChange = mean(TPM[Condition == numerator], na.rm = T) / mean(TPM[Condition == denominator], na.rm = T),
+pvalue = t.test(TPM[Condition == numerator]) / t.test(TPM[Condition == denominator])$p.value) %>%
+mutate(Hit = ifelse(pvalue >= -log10(pvalueCut) & abs(foldChange) >= foldChangeCut, TRUE, FALSE))
+}
+volPlotData('NC_6','NC_0',volData, 0.05, 2)
+?t.test
+volPlotData <- function(numerator, denominator, data, pvalueCut, foldChangeCut){
+# This function takes in the RNAseq data, and calculates the fold change
+# and pvalue from two conditions (numerator and denominator) and labels
+# which genes are significant or not based on the user defined pvalue and
+# fold change cutoffs.
+data %>% filter(Condition %in% c(numerator, denominator)) %>%
+group_by(GeneName) %>%
+summarise(foldChange = mean(TPM[Condition == numerator], na.rm = T) / mean(TPM[Condition == denominator], na.rm = T),
+pvalue = t.test(TPM[Condition == numerator], TPM[Condition == denominator], na.rm = T)$p.value) %>%
+mutate(Hit = ifelse(pvalue >= -log10(pvalueCut) & abs(foldChange) >= foldChangeCut, TRUE, FALSE))
+}
+volPlotData('NC_6','NC_0',volData, 0.05, 2)
+volPlotData('NC_6','NC_0',volData, 0.05, 2) %>% sum(Hit)
+volPlotData('NC_6','NC_0',volData, 0.05, 2)$Hit %>% sum()
+?sum
+volPlotData('NC_6','NC_0',volData, 0.05, 2)$Hit %>% sum(na.rm = T)
+volPlotData <- function(numerator, denominator, data, pvalueCut, foldChangeCut){
+# This function takes in the RNAseq data, and calculates the fold change
+# and pvalue from two conditions (numerator and denominator) and labels
+# which genes are significant or not based on the user defined pvalue and
+# fold change cutoffs.
+data %>% filter(Condition %in% c(numerator, denominator)) %>%
+group_by(GeneName) %>%
+summarise(foldChange = mean(TPM[Condition == numerator], na.rm = T) / mean(TPM[Condition == denominator], na.rm = T),
+pvalue = t.test(TPM[Condition == numerator], TPM[Condition == denominator], na.rm = T)$p.value) %>%
+mutate(Hit = ifelse(pvalue >= -log10(pvalueCut) & foldChangeCut >= abs(foldChange), TRUE, FALSE))
+}
+volPlotData('NC_6','NC_0',volData, 0.05, 2)$Hit %>% sum(na.rm = T)
+?log
+-log10(0.05)
+volPlotData <- function(numerator, denominator, data, pvalueCut, foldChangeCut){
+# This function takes in the RNAseq data, and calculates the fold change
+# and pvalue from two conditions (numerator and denominator) and labels
+# which genes are significant or not based on the user defined pvalue and
+# fold change cutoffs.
+data %>% filter(Condition %in% c(numerator, denominator)) %>%
+group_by(GeneName) %>%
+summarise(foldChange = mean(TPM[Condition == numerator], na.rm = T) / mean(TPM[Condition == denominator], na.rm = T),
+pvalue = t.test(TPM[Condition == numerator], TPM[Condition == denominator], na.rm = T)$p.value) %>%
+mutate(Hit = ifelse(pvalue <= pvalueCut & log2(foldChangeCut) >= log2(abs(foldChange)), TRUE, FALSE))
+}
+volPlotData('NC_6','NC_0',volData, 0.05, 2)$Hit %>% sum(na.rm = T)
+volPlotData('NC_6','NC_0',volData, 0.05, 2)$Hit %>% sum(na.rm = T)/nrow()
+volPlotData('NC_6','NC_0',volData, 0.05, 2)$Hit %>% sum(na.rm = T)/nrow(.)
+volPlotData('NC_6','NC_0',volData, 0.05, 2)$Hit %>% sum(na.rm = T)/length(.)
+volPlotData('NC_6','NC_0',volData, 0.05, 2)$Hit
+volPlotData('NC_6','NC_0',volData, 0.05, 2)
+log2(2.1)
+log2(2)
+volPlotData <- function(numerator, denominator, data, pvalueCut, foldChangeCut){
+# This function takes in the RNAseq data, and calculates the fold change
+# and pvalue from two conditions (numerator and denominator) and labels
+# which genes are significant or not based on the user defined pvalue and
+# fold change cutoffs.
+data %>% filter(Condition %in% c(numerator, denominator)) %>%
+group_by(GeneName) %>%
+summarise(foldChange = mean(TPM[Condition == numerator], na.rm = T) / mean(TPM[Condition == denominator], na.rm = T),
+pvalue = t.test(TPM[Condition == numerator], TPM[Condition == denominator], na.rm = T)$p.value) %>%
+mutate(Hit = ifelse(pvalue <= pvalueCut & log2(abs(foldChange)) >= log2(foldChangeCut), TRUE, FALSE))
+}
+volPlotData('NC_6','NC_0',volData, 0.05, 2)
+volPlotData()
+volPlotData
+runApp()
+df
+df
+?selectInput
+runApp()
+runApp()
+runApp()
+df = volPlotData('NC_6','NC_0',volData, 0.05, 2)
+ggplot(df, aes(x = log2(foldChange), y = -log10(pvalue))) +
+geom_vline(xintercept = -log2(c(input$fcCut, 1/input$fcCut))) + geom_point()
+df
+ggplot(df, aes(x = log2(foldChange), y = -log10(pvalue)))  + geom_point()
+runApp()
+ggplot(df, aes(x = log2(foldChange), y = -log10(pvalue), colour = Hit)) + geom_point() +
+theme_bw() + scale_color_manual(values = c('#bababa','#e08214'))
+df
+df = volPlotData('NC_6','NC_0',volData, 0.05, 2)
+ggplot(df, aes(x = log2(foldChange), y = -log10(pvalue), colour = Hit)) + geom_point() +
+theme_bw() + scale_color_manual(values = c('#bababa','#e08214'))
+volPlotData <- function(numerator, denominator, data, pvalueCut, foldChangeCut){
+# This function takes in the RNAseq data, and calculates the fold change
+# and pvalue from two conditions (numerator and denominator) and labels
+# which genes are significant or not based on the user defined pvalue and
+# fold change cutoffs.
+data %>% filter(Condition %in% c(numerator, denominator)) %>%
+group_by(GeneName) %>%
+summarise(foldChange = mean(TPM[Condition == numerator], na.rm = T) / mean(TPM[Condition == denominator], na.rm = T),
+pvalue = t.test(TPM[Condition == numerator], TPM[Condition == denominator], na.rm = T)$p.value) %>%
+mutate(Hit = ifelse(pvalue <= pvalueCut & abs(log2(foldChange)) >= log2(foldChangeCut), TRUE, FALSE))
+}
+df = volPlotData('NC_6','NC_0',volData, 0.05, 2)
+ggplot(df, aes(x = log2(foldChange), y = -log10(pvalue), colour = Hit)) + geom_point() +
+theme_bw() + scale_color_manual(values = c('#bababa','#e08214'))
+ggplot(df, aes(x = log2(foldChange), y = -log10(pvalue), colour = Hit)) + geom_point() +
+theme_bw() + scale_color_manual(values = c('#bababa','#e08214'))
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+volPlotDataFun()
+volPlotDataFun
+runApp()
+runApp()
+runApp()
+write_csv(volData, '/Users/kylekovary/Documents/GitHub/ShinyApps/RNAseqExplorer/data/volData.csv')
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+volData %>% filter(Condition %in% c('NC_0', 'NC_6')) %>%
+group_by(GeneName) %>%
+summarise(foldChange = mean(TPM[Condition == 'NC_6'], na.rm = T) / mean(TPM[Condition == 'NC_0'], na.rm = T),
+pvalue = t.test(TPM[Condition == input$volNumerator], TPM[Condition == input$volDenominator], na.rm = T)$p.value) %>%
+mutate(Hit = ifelse(pvalue <= .05 & abs(log2(foldChange)) >= log2(2), TRUE, FALSE))
+volData %>% filter(Condition %in% c('NC_0', 'NC_6')) %>%
+group_by(GeneName) %>%
+summarise(foldChange = mean(TPM[Condition == 'NC_6'], na.rm = T) / mean(TPM[Condition == 'NC_0'], na.rm = T),
+pvalue = t.test(TPM[Condition == 'NC_6'], TPM[Condition == 'NC_0'], na.rm = T)$p.value) %>%
+mutate(Hit = ifelse(pvalue <= .05 & abs(log2(foldChange)) >= log2(2), TRUE, FALSE))
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+?sample
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+volData = read_csv('data/volData.csv')
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+shiny::runApp()
+runApp()
+?read_csv
+shiny::runApp()
+?h6
+?em
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+shiny::runApp()
+shiny::runApp()
+runApp()
+?textInput
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+shiny::runApp()
+shiny::runApp()
+shiny::runApp()
+?wellPanel
+shiny::runApp()
+runApp()
+runApp()
+?verticalLayout
+runApp()
+runApp()
+?htmlOutput
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+?read_lines
+?readLines
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+geneSyns = read_csv('data/GeneNames.csv')
+?grep
+runApp()
+geneSearch('Ap2',geneSyns, normalized_data_genelevel_tpm)
+# Read in data
+normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
+# Read in data
+normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
+geneSearch('Ap2',geneSyns, normalized_data_genelevel_tpm)
+geneSyns
+grep(geneSyns, 'Ap2')
+grep('Ap2',geneSyns)
+geneSyns[2,]
+geneSyns[3,]
+grep('Ap2',geneSyns, ignore.case = T)
+geneSyns
+filter(geneSyns, GN_Syn == 'Ap2')
+filter(geneSyns, tolower(GN_Syn) == tolower('Ap2'))
+filter(geneSyns, tolower(GN_Syn) == tolower('AP2'))
+filter(geneSyns, tolower(GN_Syn) == tolower('AP2'))[1,]
+filter(geneSyns, tolower(GN_Syn) == tolower('AP2'))[1,1]
+filter(geneSyns, tolower(GN_Syn) == tolower('AP2'))[1,1] %>% as.character()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+?GET
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+request <- GET(url = 'uniprot.org/uniprot/F6M2J8')
+request
+content(request, as="text")
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+request
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+#url = paste0('https://www.uniprot.org/uniprot/',selected)
+request <- GET(url = 'https://www.uniprot.org/uniprot/P37238.html')
+request
+#url = paste0('https://www.uniprot.org/uniprot/',selected)
+request <- GET(url = 'https://www.uniprot.org/uniprot/P37238')
+request
+#writeLines(content(request, as="text"), file('uniprot.html'))
+content(request, as = "text")
+?htmlOutput
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+?renderUI
+?uiOutput
+?renderPlot
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+?uiOutput
+runApp()
+?includeHTML
+?renderUI
+runApp()
+runApp()
+runApp()
+runApp()
+?renderPrint
+runApp()
+runApp()
+?textOutput
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+shiny::runApp()
+?actionButton
+?isolate
+?actionButton
+shiny::runApp()
+data()
+data
+shiny::runApp()
+runApp()
+shiny::runApp()
+runApp()
+runApp()
+strwrap('oiwejfiojwefwef')
+strwrap('oiwejfiojwefwef', width = 0.1)
+strwrap('oiwej fiojwefwef', width = 0.1)
+gsub('(.{1,90})(\\s|$)', '\\1\n', 'oiwjefoiwjefjweoifjiwoejfiojwef')
+gsub('(.{1,10})(\\s|$)', '\\1\n', 'oiwjefoiwjefjweoifjiwoejfiojwef')
+gsub('(.{1,10})(\\s|$)', '\\1\n', 'oiwjefoiwje fjweoifjiwoejfiojwef')
+gsub('(.{1,50})(\\s|$)', '\\1\n', 'oiwjefoiwje fjweoifjiwoejfiojwef')
+gsub('(.{1,50})(\\s|$)', '\\1\n', 'oiwjefoiwje fjweoifjiwoej fiojwef')
+strwrap("Lorem ipsum... you know the routine", width=10)
+paste(strwrap(s,90), collapse="\n")
+paste(strwrap("Lorem ipsum... you know the routine",90), collapse="\n")
+paste(strwrap("Lorem ipsum... you know the routine",10), collapse="\n")
+shiny::runApp()

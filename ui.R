@@ -19,46 +19,46 @@ shinyUI(
                                            c("siCtrl" = "siNC","siPPARg" = "siPPARG"),
                                            selected = c("siNC","siPPARG"),
                                            inline = TRUE),
-                            
+                        
                         checkboxGroupInput("time", "Time Points to Plot (Days):",
                                            c("0" = 0,"0.5" = 0.5, "1" = 1, "2" = 2, 
                                              "3" = 3, "4" = 4, "5" = 5, "6" = 6),
                                            selected = c(0,0.5,1,2,3,4,5,6),
                                            inline = TRUE),
-                            
+                        
                         textInput("genes", "Genes (separate by space):", value = "Pparg"),
-                            
+                        
                         actionButton('plot','Plot'),
                         
                         
                         h3(strong("Download")),
-                            
+                        
                         # Download Plot Settings
                         h5("PDF Dimensions"),
                         splitLayout(
                           textInput("width", "Width (in)", value = 10),
                           textInput("height", "Height (in)", value = 5)
-                          ),
-                            
+                        ),
+                        
                         downloadButton("downloadPlot", "Export plot as PDF"),
-                            
+                        
                         # Download Data Settings
                         downloadButton("downloadData", "Export table as CSV")
-                            
-                            
-                        ),
-                          
+                        
+                        
+                      ),
+                      
                       mainPanel(
                         tabsetPanel(
                           tabPanel("Plots", 
                                    plotOutput("plot")
-                                   ),
+                          ),
                           tabPanel("Data Table", 
                                    tableOutput("table")
-                                   )
                           )
                         )
-                      ),
+                      )
+             ),
              tabPanel('Volcano Plots',
                       sidebarPanel(
                         h6(strong('Please be patient,'), em('it may take a minute to display the plot.')),
@@ -93,6 +93,44 @@ shinyUI(
                         plotOutput("volPlot"),
                         verbatimTextOutput("head")
                       )
+             ),
+             tabPanel('Dynamics Categories',
+                      sidebarPanel(
+                        checkboxGroupInput('d0_siRNA', 
+                                           label = 'Day 0 siCtrl/siPparg',
+                                           choices = c('+','-','='),
+                                           inline = TRUE),
+                        checkboxGroupInput('dm_siRNA', 
+                                           label = 'Dex+IBMX siCtrl/siPparg',
+                                           choices = c('+','-','='),
+                                           inline = TRUE),
+                        checkboxGroupInput('dm_NC', 
+                                           label = 'Dex+IBMX siCtrl DM/0',
+                                           choices = c('+','-','='),
+                                           inline = TRUE),
+                        checkboxGroupInput('dm_PPARG', 
+                                           label = 'Dex+IBMX siPparg DM/0',
+                                           choices = c('+','-','='),
+                                           inline = TRUE),
+                        checkboxGroupInput('ins_siRNA', 
+                                           label = 'Ins siCtrl/siPparg',
+                                           choices = c('+','-','='),
+                                           inline = TRUE),
+                        checkboxGroupInput('ins_NC', 
+                                           label = 'Ins siCtrl DM/0',
+                                           choices = c('+','-','='),
+                                           inline = TRUE),
+                        checkboxGroupInput('ins_PPARG', 
+                                           label = 'Ins siPparg DM/0',
+                                           choices = c('+','-','='),
+                                           inline = TRUE),
+                        
+                        actionButton('dynPlotButton','Plot')
+                      ),
+                      mainPanel(
+                        plotOutput('dynPlot', height = '600px'),
+                        #verbatimTextOutput("head")
                       )
              )
   )
+)

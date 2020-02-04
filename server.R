@@ -1,15 +1,21 @@
 library(shiny)
 library(tidyverse)
 library(readxl)
+library(httr)
+library(viridis)
+library(scales)
+library(gtools)
 source('code/functions.R')
 
 # Read in data
 normalized_data_genelevel_tpm = read_csv("data/normalized_data_genelevel_tpm.csv")
 geneSyns = read_csv('data/GeneNames.csv')
 volData = read_csv('data/volData.csv')
+norm <- read_csv('data/norm.csv')
+cat_quant_long <- read_csv('data/cat_quant_long.csv')
 
-shinyServer(function(input, output) {
-   
+shinyServer(function(input, output, session) {
+  
   # Reads genes and formats them when plot buttion is pushed
   geneNames <- reactive({
     input$plot
@@ -32,6 +38,26 @@ shinyServer(function(input, output) {
     mat = cbind(colnames(tab[,2:ncol(tab)]),mat)
     colnames(mat) = c("Sample",as.character(tab$Condition))
     as.data.frame(mat) %>% separate(Sample, into = c("Day","Replicate"), sep = "\\_")
+  })
+  
+  # Updates dropdown menu with searched genes
+  observe({
+    updateSelectInput(session = session, inputId = "uniprot", choices = geneNames())
+  })
+  
+  # Write Uniprot HTML File
+  oijfewoji <- reactive({
+    selected = filter(geneSyns, tolower(GN_Syn) == tolower(input$uniprot))
+    selected = selected[1,1] %>% as.character()
+    
+    paste0('https://www.uniprot.org/uniprot/',selected)
+  })
+  
+  output$Uniprot <- renderText({
+    #request <- GET(url = url())
+    #writeLines(content(request, as="text"), file('uniprot.html'))
+    #content(request, as = "text")
+    as.character(url())
   })
   
   
@@ -108,8 +134,8 @@ shinyServer(function(input, output) {
       theme(legend.position="none")
   })
   output$head <- renderPrint(
-      volPlotData() %>% head()
-    )
+    volPlotData() %>% head()
+  )
   # Download PDF of Volcano Plot
   output$volDownloadPlot <-downloadHandler(
     filename = function() {
@@ -133,5 +159,27 @@ shinyServer(function(input, output) {
       write.csv(volPlotData(), file, row.names = FALSE)
     }
   )
+  
+  # Dynamics heatmap
+  dynPlot <- eventReactive(
+    input$dynPlotButton, 
+    {
+      cat_heatmap( 
+        d0_siRNA_ = input$d0_siRNA, 
+        dm_siRNA_ = input$dm_siRNA, 
+        dm_NC_ = input$dm_NC,
+        dm_PPARG_ = input$dm_PPARG,
+        ins_siRNA_ = input$ins_siRNA,
+        ins_NC_ = input$ins_NC,
+        ins_PPARG_ = input$ins_PPARG,
+        output = 'heatmap'
+      )
+      
+    }
+  )
+  
+  output$dynPlot <- renderPlot({
+    dynPlot()
+  })
   
 })
