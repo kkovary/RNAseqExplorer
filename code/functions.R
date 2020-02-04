@@ -77,10 +77,10 @@ cat_heatmap <- function(data = norm, cat = cat_quant_long, d0_siRNA_ = NULL,
     summarise(meanTPM = mean(tpm, na.rm = T)) %>%
     group_by(GeneName) %>% mutate(normTPM = meanTPM / meanTPM[day == 0 & siRNA == 'NC'])
   
-  font_size <- 10 - 0.04*nrow(cat)
-  if(font_size < 0){
-    font_size <- 0.1
-  }
+  # font_size <- 10 - 0.04*nrow(cat)
+  # if(font_size < 0){
+  #   font_size <- 0.1
+  # }
   
   brbg_hcl <- colorspace::diverging_hcl(11,
                                         h = c(180, 50), c = 80, l = c(20, 95), power = c(0.7, 1.3))
@@ -94,7 +94,7 @@ cat_heatmap <- function(data = norm, cat = cat_quant_long, d0_siRNA_ = NULL,
              #scale_fill_continuous(palette = 'Blue-Red') +
              coord_equal() + 
              facet_wrap(~siRNA, ncol=2) + theme_classic() +
-             xlab('Day') + theme(axis.text.y = element_text(size = font_size),
+             xlab('Day') + theme(axis.text.y = element_text(size = 10),
                                  axis.text.x = element_text(angle = 90, size = 6))
          } else{
            warning('no genes in selected range')
