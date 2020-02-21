@@ -164,7 +164,9 @@ shinyServer(function(input, output, session) {
   dynPlot <- eventReactive(
     input$dynPlotButton, 
     {
-      cat_heatmap( 
+      cat_heatmap(
+        data = norm, 
+        cat = cat_quant_long,
         d0_siRNA_ = input$d0_siRNA, 
         dm_siRNA_ = input$dm_siRNA, 
         dm_NC_ = input$dm_NC,
