@@ -1,6 +1,7 @@
 # RNAseqExplorer
 
 This is a Shiny App that plots RNA-seq data
+http://kylekovary.shinyapps.io/RNAseqExplorer/
 
 # Features
 - Plot time courses of multiple genes of transcripts per million
